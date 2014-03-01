@@ -9,28 +9,40 @@
   
   <link rel="stylesheet" type="text/css" href="/css/result-light.css">
   <style type='text/css'>
-    
+        #footer {
+            margin-top: 30px;
+                }
+        #log p {
+            margin-top: 20px;
+                }
   </style>
-  
-
 
 <script type='text/javascript'>//<![CDATA[ 
+
+function log(message)
+{
+    $("#log").append($("p").text(message));
+}
+
 $(window).load(function(){
 $(function() {
-  $("#encrypted_label").hide();
-  $("#encrypted").hide();
   $("#encrypt").click(function() {
+    $("#log").empty();
     var repository = $("input#repository").val();
     var travis_url = "http://api.travis-ci.org/repos/" + repository + "/key";
       
+    
+    log("Requesting Travis public key from " + travis_url);
 
       $.getJSON('http://jsonp.jit.su/?callback=?&url=' + travis_url, function(data){
     var public_key = data["key"];
-    $("#log").append("Public key of " + repository + ":<br /> " + public_key);
-          var encrypt = new JSEncrypt();
-          encrypt.setPublicKey(public_key);
-          var encrypted = encrypt.encrypt($('input#data').val());
-    $("#log").append("Encrypted data <br />" + encrypted);
+    log("Public key of " + repository);
+    log(public_key)
+      var encrypt = new JSEncrypt();
+      encrypt.setPublicKey(public_key);
+      var encrypted = encrypt.encrypt($('input#data').val());
+    log("Encrypted data:");
+    log(encrypted);
   });
   });
 });
@@ -53,10 +65,8 @@ $(function() {
 
 <p>Then add it to .travis.yml, in env: global:, so that it will be decrypted by Travis at build time, see: <a href="http://docs.travis-ci.com/user/encryption-keys/">http://docs.travis-ci.com/user/encryption-keys/</a></p>
 
-<p id="log"></p>
-<p></p> 
-<p></p> 
-<p><small>by <a href="http://github.com/zonca">zonca</a></small></p>
+<div id="log"></div>
+<p id="footer"><small>by <a href="http://github.com/zonca">zonca</a></small></p>
 </body>
 
 
