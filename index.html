@@ -35,7 +35,7 @@ $(window).load(function(){
             log("Requesting Travis public key from " + travis_url);
             $.getJSON('http://jsonp.jit.su/?callback=?&url=' + travis_url, function(data){
                 var public_key = data["key"];
-                log("Public key of " + repository);
+                log("Public key of " + repository + ":");
                 log(public_key)
                 var encrypt = new JSEncrypt();
                 encrypt.setPublicKey(public_key);
