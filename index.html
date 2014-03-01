@@ -1,24 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>Travis-CI encrypt</title>
-  
-  <script type='text/javascript' src='//code.jquery.com/jquery-2.1.0.js'></script>
-  <script type='text/javascript' src='js/jsencrypt.min.js'></script>
-  
-  <link rel="stylesheet" type="text/css" href="/css/result-light.css">
-  <style type='text/css'>
-        #footer {
-            margin-top: 30px;
-                }
-            #log {
-background: grey;
-}
-        #log p {
-            margin-top: 20px;
-                }
-  </style>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Travis-CI encrypt</title>
+
+<script type='text/javascript' src='//code.jquery.com/jquery-2.1.0.js'></script>
+<script type='text/javascript' src='js/jsencrypt.min.js'></script>
+
+<style type='text/css'>
+    #footer {
+        margin-top: 30px;
+            }
+    #log {
+        background: grey;
+            }
+    #log p {
+        margin-top: 20px;
+            }
+</style>
 
 <script type='text/javascript'>//<![CDATA[ 
 
@@ -28,36 +27,34 @@ function log(message)
 }
 
 $(window).load(function(){
-$(function() {
-  $("#encrypt").click(function() {
-    $("#log").empty();
-    var repository = $("input#repository").val();
-    var travis_url = "http://api.travis-ci.org/repos/" + repository + "/key";
-      
-    
-    log("Requesting Travis public key from " + travis_url);
-
-      $.getJSON('http://jsonp.jit.su/?callback=?&url=' + travis_url, function(data){
-    var public_key = data["key"];
-    log("Public key of " + repository);
-    log(public_key)
-      var encrypt = new JSEncrypt();
-      encrypt.setPublicKey(public_key);
-      var encrypted = encrypt.encrypt($('input#data').val());
-    log("Encrypted data:");
-    log(encrypted);
-  });
-  });
+    $(function() {
+        $("#encrypt").click(function() {
+            $("#log").empty();
+            var repository = $("input#repository").val();
+            var travis_url = "http://api.travis-ci.org/repos/" + repository + "/key";
+            log("Requesting Travis public key from " + travis_url);
+            $.getJSON('http://jsonp.jit.su/?callback=?&url=' + travis_url, function(data){
+                var public_key = data["key"];
+                log("Public key of " + repository);
+                log(public_key)
+                var encrypt = new JSEncrypt();
+                encrypt.setPublicKey(public_key);
+                var encrypted = encrypt.encrypt($('input#data').val());
+                log("Encrypted data:");
+                log(encrypted);
+            });
+        });
+    });
 });
-});//]]>  
 
+//]]>  
 </script>
 
 
 </head>
 <body>
   <form>
-    <input type="text" value="zonca/zonca.github.io" id="repository" name="repository" />
+    <input type="text" value="user/repository" id="repository" name="repository" />
     <input type="text" value="VARNAME=varvalue" id="data" name="data" />    
     <input type="button" value="Encrypt" id="encrypt" />
 </form>
