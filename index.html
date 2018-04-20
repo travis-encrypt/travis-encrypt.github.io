@@ -4,8 +4,8 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <title>Travis-CI encrypt</title>
 
-<script type='text/javascript' src='//code.jquery.com/jquery-2.1.0.js'></script>
-<script type='text/javascript' src='js/jsencrypt.min.js'></script>
+<script src='https://code.jquery.com/jquery-2.1.0.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/2.3.1/jsencrypt.js"></script>
 
 <style type='text/css'>
     #footer {
@@ -19,7 +19,7 @@
             }
 </style>
 
-<script type='text/javascript'>//<![CDATA[ 
+<script type='text/javascript'>//<![CDATA[
 
 function log(message)
 {
@@ -47,7 +47,7 @@ $(window).load(function(){
     });
 });
 
-//]]>  
+//]]>
 </script>
 
 
@@ -55,7 +55,7 @@ $(window).load(function(){
 <body>
   <form>
     <input type="text" value="user/repository" id="repository" name="repository" />
-    <input type="text" value="VARNAME=varvalue" id="data" name="data" />    
+    <input type="text" value="VARNAME=varvalue" id="data" name="data" />
     <input type="button" value="Encrypt" id="encrypt" />
 </form>
 
